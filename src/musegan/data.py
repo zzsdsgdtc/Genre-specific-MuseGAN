@@ -101,9 +101,6 @@ def get_dataset(data, labels=None, wrong_labels=None, batch_size=None, data_shap
     else:
         assert len(data) == len(labels), (
             "Lengths of `data` and `lables` do not match.")
-        # TODO: may need to modify the label format,
-        # TODO: or just give the genre index and generate one-hot vector later
-        # TODO: also need to generate wrong label according to the input true labels.
         dataset = tf.data.Dataset.from_generator(
             lambda: _gen_data(data, labels, wrong_labels), (tf.float32, tf.int32, tf.int32))
 #         if use_random_transpose:
