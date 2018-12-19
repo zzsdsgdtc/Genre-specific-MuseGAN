@@ -93,6 +93,7 @@ def load_training_data(params, config):
 
     else:
         labels = None
+        wrong = None
     LOGGER.info("Loading training data.")
     data = load_data(config['data_source'], config['data_filename'])
     LOGGER.info("Training data size: %d", len(data))
