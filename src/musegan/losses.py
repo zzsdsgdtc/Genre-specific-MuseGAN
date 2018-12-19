@@ -41,16 +41,22 @@ def nonsaturating_gan_losses(discriminator_real_outputs,discriminator_real_wrong
     # (real phrase, true label)
     discriminator_loss_real = tf.losses.sigmoid_cross_entropy(
         tf.ones_like(discriminator_real_outputs), discriminator_real_outputs)
-    # (real phrase, wrong label)
-    discriminator_loss_real_wrong = tf.losses.sigmoid_cross_entropy(
-        tf.zeros_like(discriminator_real_wrong_outputs), discriminator_real_wrong_outputs)
+    if discriminator_real_wrong_outputs is not None:
+        # (real phrase, wrong label)
+        discriminator_loss_real_wrong = tf.losses.sigmoid_cross_entropy(
+            tf.zeros_like(discriminator_real_wrong_outputs), discriminator_real_wrong_outputs)
     # (fake phrase, true label)
     discriminator_loss_fake = tf.losses.sigmoid_cross_entropy(
         tf.zeros_like(discriminator_fake_outputs), discriminator_fake_outputs)
-
-    discriminator_loss = discriminator_loss_real + (discriminator_loss_fake + discriminator_loss_real_wrong) / 2
+    
+    if discriminator_real_wrong_outputs is not None:
+        discriminator_loss = discriminator_loss_real + (discriminator_loss_fake + discriminator_loss_real_wrong) / 2
+    else:
+        discriminator_loss = discriminator_loss_real + discriminator_loss_fake
+        
     generator_loss = tf.losses.sigmoid_cross_entropy(
         tf.ones_like(discriminator_fake_outputs), discriminator_fake_outputs)
+    
     return generator_loss, discriminator_loss
 
 def wasserstein_gan_losses(discriminator_real_outputs, discriminator_real_wrong_outputs,
