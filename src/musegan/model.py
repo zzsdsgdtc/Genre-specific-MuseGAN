@@ -118,12 +118,17 @@ class Model:
 
             #--- Discriminator output -----------------------------------------
             nodes['dis_real'] = self.dis(x, y, True)
+            
+            # for normal D(w/o matching-aware), comment out below
             nodes['dis_real_wrong'] = self.dis(x, w, True)
+           
             nodes['dis_fake'] = self.dis(nodes['fake_x'], y, True)
 
             # ============================= Losses =============================
             LOGGER.info("Building losses.")
+            
             # --- Adversarial losses -------------------------------------------
+            # for normal D, choose the commented one and comment the current one
             nodes['gen_loss'], nodes['dis_loss'] = get_adv_losses(
                 nodes['dis_real'], nodes['dis_real_wrong'], nodes['dis_fake'], config['gan_loss_type'])
 #             nodes['gen_loss'], nodes['dis_loss'] = get_adv_losses(
