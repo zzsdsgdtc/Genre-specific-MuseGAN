@@ -18,7 +18,7 @@ All the operations below assume the working directory is the musegan root direct
   ```
   - Try it again!
   
-  If there's still some packages missing, just pip install or conda install the reported one.
+  If there's still some packages missing during training, just pip install or conda install the reported one.
   
 ### Prepare training data
 ```sh
