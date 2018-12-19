@@ -1,4 +1,4 @@
-###Data Processing
+### Data Processing
 
 
 **Table of Contents**
@@ -14,7 +14,7 @@
 
 
 
-###Data
+### Data
 The processed data are already attached in the project. If you would like to create your own dataset for training, please first download the following data sources: 
 
 LMD Matched : http://hog.ee.columbia.edu/craffel/lmd/lmd_matched.tar.gz
